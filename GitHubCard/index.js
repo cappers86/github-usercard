@@ -3,14 +3,14 @@
            https://api.github.com/users/<your name>
 */
 
-axios.get(`https://api.github.com/users/cappers86`)
 
-.then(response,  () => {
-  console.log(response);
-})
 
-.catch(error => {
-  console.log(`there was an error`, error);
+const cardLocation = document.querySelector('.cards');
+
+axios.get('https://api.github.com/users/cappers86')
+.then(response => {
+  console.log(response.data);
+  cardLocation.appendChild(createCard(response.data));
 });
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -62,28 +62,44 @@ function createCard(data) {
   const newName = document.createElement(`h3`);
   const newUserName = document.createElement(`p`);
   const newLocation = document.createElement(`p`);
-  const newprofile = document.createElement(`p`);
+  const newProfile = document.createElement(`p`);
   const newProfileLink = document.createElement(`a`);
   const newFollowers = document.createElement(`p`);
   const newFollowing = document.createElement(`p`)
   const newBio = document.createElement(`p`);
 //class names 
   newCard.classList.add(`card`);
-  newCard.classList.add(`card-info`);
+  newCardInfo.classList.add(`card-info`);
   newName.classList.add(`name`);
   newUserName.classList.add(`username`);
 // content 
   newImage.src =`${data.avatar_url}`;
   newName.textContent = `${data.name}`;
   newUserName.textContent =`${data.login}`;
-  newLocation.textContent = `${data.location}`;
-  newprofile.textContent = `Profile: `;
+  newLocation.textContent = `Location: ${data.location}`;
+  newProfile.textContent = `Profile: `;
   newProfileLink.textContent = `${data.html_url}`;
   newProfileLink.href = `${data.html_url}`;
   newFollowers.textContent = `${data.followers}`;
   newFollowing.textContent =`${data.following}`
   newBio.textContent =`${data.bio}`;
-}
+//elements
+newCard.appendChild(newCardInfo);
+newCard.appendChild(newImage);
+newCardInfo.appendChild(newName);
+newCardInfo.appendChild(newUserName);
+newCardInfo.appendChild(newLocation);
+newCardInfo.appendChild(newProfile);
+newCardInfo.appendChild(newProfileLink);
+newCardInfo.appendChild(newFollowers);
+newCardInfo.appendChild(newFollowing);
+newCardInfo.appendChild(newBio);
+
+return newCard;
+
+
+
+};
 
 /* List of LS Instructors Github username's: 
   tetondan
