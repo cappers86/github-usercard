@@ -5,12 +5,12 @@
 
 axios.get(`https://api.github.com/users/cappers86`)
 
-.then(response => {
+.then(response,  () => {
   console.log(response);
 })
 
 .catch(error => {
-  console.log(error);
+  console.log(`there was an error`, error);
 });
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -54,7 +54,7 @@ const followersArray = [];
 </div>
 
 */
-
+// create function 
 function createCard(data) {
   const newCard = document.createElement(`div`);
   const newImage = document.createElement(`img`);
@@ -62,11 +62,27 @@ function createCard(data) {
   const newName = document.createElement(`h3`);
   const newUserName = document.createElement(`p`);
   const newLocation = document.createElement(`p`);
+  const newprofile = document.createElement(`p`);
   const newProfileLink = document.createElement(`a`);
   const newFollowers = document.createElement(`p`);
   const newFollowing = document.createElement(`p`)
   const newBio = document.createElement(`p`);
-
+//class names 
+  newCard.classList.add(`card`);
+  newCard.classList.add(`card-info`);
+  newName.classList.add(`name`);
+  newUserName.classList.add(`username`);
+// content 
+  newImage.src =`${data.avatar_url}`;
+  newName.textContent = `${data.name}`;
+  newUserName.textContent =`${data.login}`;
+  newLocation.textContent = `${data.location}`;
+  newprofile.textContent = `Profile: `;
+  newProfileLink.textContent = `${data.html_url}`;
+  newProfileLink.href = `${data.html_url}`;
+  newFollowers.textContent = `${data.followers}`;
+  newFollowing.textContent =`${data.following}`
+  newBio.textContent =`${data.bio}`;
 }
 
 /* List of LS Instructors Github username's: 
